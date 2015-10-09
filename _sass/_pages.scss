@@ -1,0 +1,68 @@
+.section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#page1 {
+  .global-header-panel {
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
+
+    background: url("/assets/images/index-page-header-bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .kotlin-info {
+    position: absolute;
+    top: 75vh;
+    right: 50px;
+    text-align: right;
+  }
+
+  .kotlin-info-description {
+    margin-bottom: 24px;
+    color: #fff;
+    font-size: 48px;
+    line-height: 50px;
+    font-family: "GraublauSlab Regular", Georgia, serif;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2), -1px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .kotlin-info-description-extra {
+    position: relative;
+    margin-bottom: 72px;
+    color: #fff;
+    font-size: 48px;
+    line-height: 50px;
+    font-family: "GraublauSlab Regular", Georgia, serif;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2), -1px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .g-layout {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+  }
+
+  @media (max-width: 959px) {
+    .g-layout {
+      width: auto;
+    }
+  }
+}
+#page2 {
+  background: yellow;
+  .twitter-widget {
+    position: absolute;
+    float: right;
+    top: 101vh;
+    right: 10px;
+  }
+}
+#page3 {
+  background: green;
+}
+
+
