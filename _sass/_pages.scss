@@ -9,7 +9,7 @@
     height: 100vh;
     width: 100vw;
 
-    background: url("/assets/images/index-page-header-bg.jpg") no-repeat;
+    background: url("../assets/images/index-page-header-bg.jpg") no-repeat;
     background-size: cover;
     background-position: top center;
   }
@@ -57,7 +57,7 @@
   .twitter-widget {
     position: absolute;
     float: right;
-    top: 101vh;
+    top: 105vh;
     right: 10px;
   }
 }
