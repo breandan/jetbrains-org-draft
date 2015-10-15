@@ -97,19 +97,23 @@ $(document).ready(function () {
 });
 
 $.mostPopular = function (username, callback) {
-    return $.getJSON("https://api.github.com/search/repositories?q=%40" + username, callback);
+    return $.getJSON("assets/repos.json", callback);
+    //return $.getJSON("https://api.github.com/search/repositories?q=%40" + username, callback);
 };
 
 $.statistics = function (username, repo, callback) {
-    return $.getJSON("https://api.github.com/repos/" + username + "/" + repo + "/stats/contributors", callback);
+    return $.getJSON("assets/statistics.json", callback);
+    //return $.getJSON("https://api.github.com/repos/" + username + "/" + repo + "/stats/contributors", callback);
 };
 
 $.pullRequests = function (username, repo, callback) {
-    return $.getJSON("https://api.github.com/repos/" + username + "/" + repo + "/pulls?per_page=100&state=closed", callback);
+    return $.getJSON("assets/pull_requests.json", callback);
+    //return $.getJSON("https://api.github.com/repos/" + username + "/" + repo + "/pulls?per_page=100&state=closed", callback);
 };
 
 $.youtrack = function (callback) {
-    return $.getJSON("https://youtrack.jetbrains.com/rest/issue?filter=%23IDEA+%23MPS+%23Kotlin+%23PyCharm+%23Unresolved+%23Bug+sort+by%3A+votes+desc&with=summary&with=votes&with=updated&with=reporterName&max=200", callback);
+    return $.getJSON("assets/temp.json", callback);
+    //return $.getJSON("https://youtrack.jetbrains.com/rest/issue?filter=%23IDEA+%23MPS+%23Kotlin+%23PyCharm+%23Unresolved+%23Bug+sort+by%3A+votes+desc&with=summary&with=votes&with=updated&with=reporterName&max=200", callback);
 };
 
 var jetbrains = {
@@ -119,7 +123,7 @@ var jetbrains = {
     jetbrainers: ["abreslav", "Alefas", "alexander-doroshko", "alexander-lobas", "AMPivovarov", "alexeypegov", "anna239", "anstarovoyt", "ArtemGovorov", "asedunov", "ashatalin", "avokin", "bashor", "BasLeijdekkers", "batya239", "belarusian", "boogiecat", "boot85", "breandan", "bulenkov", "chashnikov", "cheptsov", "ChShersh", "Chushuhuch", "citizenmatt", "controlflow", "CrazyCoder", "cy6erGn0m", "cy6erskunk", "dboulytchev", "deadok22", "denis-zhdanov", "denofevil", "derigel23", "develar", "dmekhanikov", "dmitry-avdeev", "dmitry-treskunov", "dnpetrov", "dovchinnikov", "dzharkov", "east825", "ekoshkin", "erokhins", "Eugene-Kudelevsky", "eugenezh", "EvilTosha", "geevee", "goodwinnk", "gorrus", "gregsh", "hhariri", "ignatov", "ilya-g", "ilya-klyuchnikov", "IlyaKazakevich", "iromeo", "JamesKovacs", "JB-Dmitry", "jonnyzzz", "juliabeliaeva", "katepol", "kir", "kirelagin", "klikh", "kradima", "ktisha", "leo-from-spb", "Leonya", "leostryuk", "lepenkinya", "ligee", "Linfar", "Lugzan", "maksimr", "matkoch", "maxim5", "max-kammerer", "maxmanuylov", "maxmedvedev", "mazine", "medvector", "mglukhikh", "MichaelNedzelsky", "mikhailvink", "morj", "NadyaZabrodina", "NataliaUkhorskaya", "nesteruk", "neuro159", "nicity", "NikolayPianikov", "niktrop", "nskvortsov", "olegs", "olegstepanov", "orangy", "orybak", "os97673", "paksv", "pauleveritt", "pavelfatin", "pavelsher", "pchel-", "penemue", "pTalanov", "rayshade", "satamas", "sayon", "segrey", "SergeyZh", "shafirov", "shalupov", "solomatov", "someone-with-default-username", "stigger", "svtk", "topka", "traff", "trespasserw", "trishagee", "tsvtkv", "udalov", "ulitink", "valentinkip", "varsy", "VladRassokhin", "vladsoroka", "vlasovskikh", "ww898", "yanex", "YannCebron", "yole", "zajac", "zanyato", "zarechenskiy", "zolotov"],
     jetContributors: [],
     topContributors: [],
-    topReporters:{},
+    topReporters: {},
     topIssues: new List('topIssues', {
         valueNames: ['link', 'summary', 'updated', 'reporter', 'votes'],
         item: '<li><span class="summary"></span> :: <span class="votes"></span> votes</li>',
@@ -150,23 +154,25 @@ $.fn.loadStatistics = function (username) {
                 jetbrains.projects[repo_name].pullRequests = data;
             }));
             promises.push($.youtrack(function (data) {
-                if(youtrack == undefined) {
+                if (youtrack == undefined) {
+                    jetbrains.topIssues.clear();
+                    jetbrains.topReporters = {};
                     $.each(data.issue, function (i, n) {
                         var issueId = n.id;
                         var summary = n.field[0].value;
                         var updated = n.field[1].value;
                         var reporter = n.field[2].value;
-                        var votes =  n.field[3].value;
+                        var votes = n.field[3].value;
 
                         jetbrains.topIssues.add({
                             link: "https://youtrack.jetbrains.com/issue/" + issueId,
-                            summary: '<a href=https://youtrack.jetbrains.com/issue/'+ issueId + '>' + summary + '</a>',
+                            summary: '<a href=https://youtrack.jetbrains.com/issue/' + issueId + '>' + summary + '</a>',
                             updated: updated,
                             reporter: reporter,
                             votes: votes
                         });
 
-                        if(jetbrains.topReporters[reporter] == undefined) {
+                        if (jetbrains.topReporters[reporter] == undefined) {
                             jetbrains.topReporters[reporter] = 0;
                         }
 
@@ -227,6 +233,7 @@ $.fn.loadStatistics = function (username) {
                 return extContrib[b] - extContrib[a];
             });
 
+            $("#leaderboard ul").empty();
             $.each(topContrib.slice(0, 10), function () {
                 var committer = {};
                 committer[this] = extContrib[this];
@@ -240,6 +247,7 @@ $.fn.loadStatistics = function (username) {
                 return jetbrains.topReporters[b] - jetbrains.topReporters[a];
             });
 
+            $("#leaderboard-reporters ul").empty();
             $.each(topReporters.slice(0, 13), function () {
                 $("#leaderboard-reporters ul").append('<li>' + this + '</li>');
             });
@@ -257,6 +265,7 @@ $.fn.loadStatistics = function (username) {
                 return b.merged_at.localeCompare(a.merged_at);
             });
 
+            $("#merged_pulls ul").empty();
             $.each(mergedPulls, function () {
                 $("#merged_pulls ul").append('<li><a href="' + this.html_url + '">' + this.title + '</a> by <a href="https://github.com/' + this.user.login + '">' + this.user.login + '</a> was merged ' + timeSince(new Date(this.merged_at)) + ' ago.</li>');
             });
