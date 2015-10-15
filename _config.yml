@@ -1,27 +1,39 @@
-# Jekyll settings
-name: JetBrains.org
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
+---
 
+port: 4000
+host: 0.0.0.0
+safe: false
+
+
+### site serving configuration ###
+exclude: [CNAME, README.md, .gitignore]
+permalink: / ## disables post output
+timezone: null
+lsi: false
+markdown: kramdown
 highlighter: pygments
 
-include:
-  - js
 
-# Custom Settings
+### content configuration ###
+title:       "SinglePaged - Simple Jekyll template"
+keywords:    "SinglePaged, jekyll, template, github, blog, single page"
+description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
+source_link: "https://github.com/t413/SinglePaged"
+favicon:     "img/favicon.ico"
+touch_icon:  "img/apple-touch-icon.png"
+google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
 
-github_url: https://github.com/JetBrains
-twitter_url: https://twitter.com/JetBrains
-forum_url: https://devnet.jetbrains.com/community
 
-# Site Settings
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "/jetbrains-org" # the subpath of your site, e.g. /blog/
-url: "http://jetbrains.org" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+### template colors, used site-wide via css ###
+colors:
+  black:     '#111111'
+  white:     '#f8f8f8'
+  blue:      '#49a7e9'
+  green:     '#9bcf2f'
+  purple:    '#c869bf'
+  orange:    '#fab125'
+  turquoise: '#0fbfcf'
+
+kramdown:
+  auto_ids:  false
+
