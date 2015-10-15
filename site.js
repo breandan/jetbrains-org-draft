@@ -107,7 +107,7 @@ $.statistics = function (username, repo, callback) {
 };
 
 $.pullRequests = function (username, repo, callback) {
-    return $.getJSON("assets/pull_requests.json", callback);
+    return $.getJSON("assets/" + repo + "-PRs.json", callback);
     //return $.getJSON("https://api.github.com/repos/" + username + "/" + repo + "/pulls?per_page=100&state=closed", callback);
 };
 
@@ -132,7 +132,7 @@ var jetbrains = {
 };
 
 $.fn.loadStatistics = function (username) {
-    var statistics, popular, youtrack;
+    var statistics, popular;
 
     $.mostPopular("jetbrains", function (data) {
         popular = data.items.slice(0, 3);
@@ -153,36 +153,34 @@ $.fn.loadStatistics = function (username) {
                 }
                 jetbrains.projects[repo_name].pullRequests = data;
             }));
-            promises.push($.youtrack(function (data) {
-                if (youtrack == undefined) {
-                    jetbrains.topIssues.clear();
-                    jetbrains.topReporters = {};
-                    $.each(data.issue, function (i, n) {
-                        var issueId = n.id;
-                        var summary = n.field[0].value;
-                        var updated = n.field[1].value;
-                        var reporter = n.field[2].value;
-                        var votes = n.field[3].value;
+        });
 
-                        jetbrains.topIssues.add({
-                            link: "https://youtrack.jetbrains.com/issue/" + issueId,
-                            summary: '<a href=https://youtrack.jetbrains.com/issue/' + issueId + '>' + summary + '</a>',
-                            updated: updated,
-                            reporter: reporter,
-                            votes: votes
-                        });
+        promises.push($.youtrack(function (data) {
+            jetbrains.topIssues.clear();
+            jetbrains.topReporters = {};
+            $.each(data.issue, function (i, n) {
+                var issueId = n.id;
+                var summary = n.field[0].value;
+                var updated = n.field[1].value;
+                var reporter = n.field[2].value;
+                var votes = n.field[3].value;
 
-                        if (jetbrains.topReporters[reporter] == undefined) {
-                            jetbrains.topReporters[reporter] = 0;
-                        }
+                jetbrains.topIssues.add({
+                    link: "https://youtrack.jetbrains.com/issue/" + issueId,
+                    summary: '<a href=https://youtrack.jetbrains.com/issue/' + issueId + '>' + summary + '</a>',
+                    updated: updated,
+                    reporter: reporter,
+                    votes: votes
+                });
 
-                        jetbrains.topReporters[reporter]++;
-                    });
+                if (jetbrains.topReporters[reporter] == undefined) {
+                    jetbrains.topReporters[reporter] = 0;
                 }
 
-                youtrack = data;
-            }));
-        });
+                jetbrains.topReporters[reporter]++;
+            });
+        }));
+
 
         $.when.apply($, promises).done(function () {
             var contributors = [];
