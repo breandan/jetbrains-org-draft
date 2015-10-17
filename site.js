@@ -96,6 +96,21 @@ $(document).ready(function () {
 
 });
 
+$.dependencies = function (callback) {
+    return $.getJSON("assets/open-source-projects.json", callback);
+    //return $.getJSON("https://api.github.com/search/repositories?q=intellij+OR+jetbrains+OR+kotlin+-%40jetbrains?per_page=100", callback);
+};
+
+$.dependents = function (callback) {
+    return $.getJSON("assets/open-source-projects.json", callback);
+    //return $.getJSON("https://api.github.com/search/repositories?q=intellij+OR+jetbrains+OR+kotlin+-%40jetbrains?per_page=100", callback);
+};
+
+$.kotlin = function (callback) {
+    return $.getJSON("assets/kotlin-projects.json", callback);
+    //return $.getJSON("https://api.github.com/search/repositories?q=kotlin+-%40jetbrains+language:kotlin&sort=stars", callback);
+};
+
 $.mostPopular = function (username, callback) {
     return $.getJSON("assets/repos.json", callback);
     //return $.getJSON("https://api.github.com/search/repositories?q=%40" + username, callback);
@@ -117,10 +132,14 @@ $.youtrack = function (callback) {
 };
 
 var jetbrains = {
+    dependencies: [],
+    dependents: [],
+    totalDependents: 3000,
     yearlyTotalCommits: 0,
+    kotlinProjects: [],
     projects: {},
     repositories: ["intellij-community", "kotlin", "anko", "ideavim", "MPS", "Nitra", "intellij-scala", "intellij-plugins", "la-clojure", "colorSchemeTool", "phpstorm-workshop", "FSharper", "Grammar-Kit", "resharper-angularjs", "workshop-jb", "meta-runner-power-pack", "intellij-haxe", "phpstorm-stubs", "spek", "resharper-nuget", "kotlin-examples", "xodus", "intellij-sbt"],
-    jetbrainers: ["abreslav", "Alefas", "alexander-doroshko", "alexander-lobas", "AMPivovarov", "alexeypegov", "anna239", "anstarovoyt", "ArtemGovorov", "asedunov", "ashatalin", "avokin", "bashor", "BasLeijdekkers", "batya239", "belarusian", "boogiecat", "boot85", "breandan", "bulenkov", "chashnikov", "cheptsov", "ChShersh", "Chushuhuch", "citizenmatt", "controlflow", "CrazyCoder", "cy6erGn0m", "cy6erskunk", "dboulytchev", "deadok22", "denis-zhdanov", "denofevil", "derigel23", "develar", "dmekhanikov", "dmitry-avdeev", "dmitry-treskunov", "dnpetrov", "dovchinnikov", "dzharkov", "east825", "ekoshkin", "erokhins", "Eugene-Kudelevsky", "eugenezh", "EvilTosha", "geevee", "goodwinnk", "gorrus", "gregsh", "hhariri", "ignatov", "ilya-g", "ilya-klyuchnikov", "IlyaKazakevich", "iromeo", "JamesKovacs", "JB-Dmitry", "jonnyzzz", "juliabeliaeva", "katepol", "kir", "kirelagin", "klikh", "kradima", "ktisha", "leo-from-spb", "Leonya", "leostryuk", "lepenkinya", "ligee", "Linfar", "Lugzan", "maksimr", "matkoch", "maxim5", "max-kammerer", "maxmanuylov", "maxmedvedev", "mazine", "medvector", "mglukhikh", "MichaelNedzelsky", "mikhailvink", "morj", "NadyaZabrodina", "NataliaUkhorskaya", "nesteruk", "neuro159", "nicity", "NikolayPianikov", "niktrop", "nskvortsov", "olegs", "olegstepanov", "orangy", "orybak", "os97673", "paksv", "pauleveritt", "pavelfatin", "pavelsher", "pchel-", "penemue", "pTalanov", "rayshade", "satamas", "sayon", "segrey", "SergeyZh", "shafirov", "shalupov", "solomatov", "someone-with-default-username", "stigger", "svtk", "topka", "traff", "trespasserw", "trishagee", "tsvtkv", "udalov", "ulitink", "valentinkip", "varsy", "VladRassokhin", "vladsoroka", "vlasovskikh", "ww898", "yanex", "YannCebron", "yole", "zajac", "zanyato", "zarechenskiy", "zolotov"],
+    jetbrainers: ["abreslav", "Alefas", "alexander-doroshko", "alexander-lobas", "AMPivovarov", "alexeypegov", "anna239", "anstarovoyt", "ArtemGovorov", "asedunov", "ashatalin", "avokin", "bashor", "BasLeijdekkers", "batya239", "belarusian", "boogiecat", "boot85", "breandan", "bulenkov", "chashnikov", "cheptsov", "ChShersh", "Chushuhuch", "citizenmatt", "controlflow", "CrazyCoder", "cy6erGn0m", "cy6erskunk", "dboulytchev", "deadok22", "denis-zhdanov", "denofevil", "derigel23", "develar", "dmekhanikov", "dmitry-avdeev", "dmitry-treskunov", "dnpetrov", "dovchinnikov", "dzharkov", "east825", "ekoshkin", "erokhins", "Eugene-Kudelevsky", "eugenezh", "EvilTosha", "geevee", "goodwinnk", "gorrus", "gregsh", "hhariri", "ignatov", "ilya-g", "ilya-klyuchnikov", "IlyaKazakevich", "Iris24", "iromeo", "JamesKovacs", "JB-Dmitry", "jonnyzzz", "juliabeliaeva", "katepol", "kir", "kirelagin", "klikh", "kradima", "ktisha", "leo-from-spb", "Leonya", "leostryuk", "lepenkinya", "ligee", "Linfar", "Lugzan", "maksimr", "matkoch", "maxim5", "max-kammerer", "maxmanuylov", "maxmedvedev", "mazine", "medvector", "mglukhikh", "MichaelNedzelsky", "mikhailvink", "morj", "NadyaZabrodina", "NataliaUkhorskaya", "nesteruk", "neuro159", "nicity", "NikolayPianikov", "niktrop", "nskvortsov", "olegs", "olegstepanov", "orangy", "orybak", "os97673", "paksv", "pauleveritt", "pavelfatin", "pavelsher", "pchel-", "penemue", "pTalanov", "rayshade", "satamas", "sayon", "segrey", "SergeyZh", "shafirov", "shalupov", "solomatov", "someone-with-default-username", "stigger", "svtk", "topka", "traff", "trespasserw", "trishagee", "tsvtkv", "udalov", "ulitink", "valentinkip", "varsy", "VladRassokhin", "vladsoroka", "vlasovskikh", "ww898", "yanex", "YannCebron", "yole", "zajac", "zanyato", "zarechenskiy", "zolotov"],
     jetContributors: [],
     topContributors: [],
     topReporters: {},
@@ -181,6 +200,25 @@ $.fn.loadStatistics = function (username) {
             });
         }));
 
+        promises.push($.dependents(function (data) {
+            $.each(data.items, function (i, n) {
+                jetbrains.totalDependents = data.total_count;
+                jetbrains.dependents.push({
+                    name: n.full_name,
+                    description: n.description
+                });
+            });
+        }));
+
+        promises.push($.kotlin(function (data) {
+            $.each(data.items, function (i, n) {
+                jetbrains.totalKotlinProjects = data.total_count;
+                jetbrains.kotlinProjects.push({
+                    name: n.full_name,
+                    description: n.description
+                });
+            });
+        }));
 
         $.when.apply($, promises).done(function () {
             var contributors = [];
@@ -266,6 +304,20 @@ $.fn.loadStatistics = function (username) {
             $("#merged_pulls ul").empty();
             $.each(mergedPulls, function () {
                 $("#merged_pulls ul").append('<li><a href="' + this.html_url + '">' + this.title + '</a> by <a href="https://github.com/' + this.user.login + '">' + this.user.login + '</a> was merged ' + timeSince(new Date(this.merged_at)) + ' ago.</li>');
+            });
+
+            $("#totaldependents").text(jetbrains.totalDependents);
+
+            $("#dependents ul").empty();
+            $.each(jetbrains.dependents, function () {
+                $("#dependents ul").append('<li><a href="https://github.com/' + this.name + '">' + this.name + '</a> - ' + this.description + '</li>');
+            });
+
+            $("#total-kotlin-projects").text(jetbrains.totalKotlinProjects);
+
+            $("#kotlin-projects ul").empty();
+            $.each(jetbrains.kotlinProjects, function () {
+                $("#kotlin-projects ul").append('<li><a href="https://github.com/' + this.name + '">' + this.name + '</a> - ' + this.description + '</li>');
             });
         });
     });
