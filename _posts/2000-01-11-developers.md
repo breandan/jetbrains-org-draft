@@ -5,8 +5,12 @@ color: white
 fa-icon: code-fork
 ---
 
-Developers who contribute to IntelliJ IDEA do not ask for our gratitude, only that those who tread in their footsteps might walk a little easier. We are incredibly fortunate to have users both talented and willing to contribute to the IntelliJ Platform. Their contributions help make IntelliJ IDEA the trusted platform we known and love. As such, these users deserve our Special Thanks. This year, we merged the following PRs from open source contributors:
+This year, we merged the following PRs from open source contributors:
 
 <div id="merged_pulls">
     <ul></ul>
 </div>
+
+If you would like to contribute to IntelliJ IDEA or any of our open source projects, we welcome your participation. Please read the following documents:
+
+* [Contributing to the IntelliJ Platform](contributing_to_the_intellij_platform)

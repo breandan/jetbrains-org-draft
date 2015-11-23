@@ -5,7 +5,7 @@ color: white
 fa-icon: recycle
 ---
 
-Over <span id="totaldependents"></span> open source projects depend on JetBrains. Here are just a few:
+Over <span id="totaldependents"></span> open source projects depend on JetBrains' software. Here are just a few:
 
 <div id="dependents">
     <ul></ul>

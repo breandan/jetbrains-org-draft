@@ -15,10 +15,10 @@ highlighter: pygments
 
 
 ### content configuration ###
-title:       "SinglePaged - Simple Jekyll template"
-keywords:    "SinglePaged, jekyll, template, github, blog, single page"
-description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
-source_link: "https://github.com/t413/SinglePaged"
+title:       "JetBrains OSS"
+keywords:    "Kotlin, IntelliJ IDEA"
+description: "Open source initiatives and resources at JetBrains."
+source_link: "https://github.com/JetBrains/jetbrains-org"
 favicon:     "img/favicon.ico"
 touch_icon:  "img/apple-touch-icon.png"
 google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
@@ -33,6 +33,7 @@ colors:
   purple:    '#c869bf'
   orange:    '#fab125'
   turquoise: '#0fbfcf'
+  gold:    '#ffd700'
 
 kramdown:
   auto_ids:  false
