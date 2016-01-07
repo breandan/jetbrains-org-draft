@@ -13,7 +13,8 @@ This year, we merged the following PRs from open source contributors:
 
 If you would like to contribute to IntelliJ IDEA or any of our open source projects, we welcome your participation. Please read the following documents:
 
-* [Contributing to the IntelliJ Platform]
+* [Contributing to the IntelliJ Platform](http://www.jetbrains.org/intellij/sdk/docs/CONTRIBUTING.html)
 * [IntelliJ Platform Coding Guidelines]
 * [Frequently Asked Questions]
-* [Download IntelliJ IDEA]
+* [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+* [Contributor License Agreement](/assets/JetBrains_CLA.pdf)
