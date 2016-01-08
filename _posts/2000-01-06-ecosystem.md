@@ -1,6 +1,6 @@
 ---
 title: "Ecosystem"
-bg: turquoise
+bg: emerald
 color: white
 fa-icon: recycle
 ---

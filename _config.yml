@@ -33,7 +33,8 @@ colors:
   purple:    '#c869bf'
   orange:    '#fab125'
   turquoise: '#0fbfcf'
-  gold:    '#ffd700'
+  gold:      '#ffd700'
+  emerald:   '#1fa67a'
 
 kramdown:
   auto_ids:  false
