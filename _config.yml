@@ -13,7 +13,6 @@ lsi: false
 markdown: kramdown
 highlighter: pygments
 
-
 ### content configuration ###
 title:       "JetBrains OSS"
 keywords:    "Kotlin, IntelliJ IDEA"
@@ -21,6 +20,7 @@ description: "Open source initiatives and resources at JetBrains."
 source_link: "https://github.com/JetBrains/jetbrains-org"
 favicon:     "img/favicon.ico"
 touch_icon:  "img/apple-touch-icon.png"
+baseurl:     "jetbrains-org"
 google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
 
 
