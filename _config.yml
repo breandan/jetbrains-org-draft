@@ -35,6 +35,7 @@ colors:
   turquoise: '#0fbfcf'
   gold:      '#ffd700'
   emerald:   '#1fa67a'
+  red: 	     '#cd3700'
 
 kramdown:
   auto_ids:  false
