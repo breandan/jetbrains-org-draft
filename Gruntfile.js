@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             },
             pages: {
                 options: {
-                    remote: 'git@github.com:tscholak/tscholak.github.io.git',
+                    remote: 'https://github.com/breandan/jetbrains-org',
                     branch: 'gh-pages'
                 }
             }
