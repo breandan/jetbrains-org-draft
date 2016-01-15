@@ -40,3 +40,5 @@ colors:
 kramdown:
   auto_ids:  false
 
+include:
+  - ".nojekyll"
