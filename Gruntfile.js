@@ -25,7 +25,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-build-control');
 
-    grunt.registerTask('build', ['copy', 'exec:jekyll']);
     grunt.registerTask('deploy', ['build', 'buildcontrol:pages']);
     grunt.registerTask('default', ['deploy']);
 };
